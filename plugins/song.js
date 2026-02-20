@@ -4,7 +4,7 @@ const { ytmp3 } = require("@distube/ytdl-core");
 
 cmd(
   {
-    pattern: "song",
+    pattern: "ytmp3",
     react: "🎶",
     desc: "Download Song",
     category: "download",
