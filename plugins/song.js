@@ -1,55 +1,105 @@
-const fs = require('fs');
-const { cmd } = require("../command");
+const { cmd, commands } = require("../command");
 const yts = require("yt-search");
-const { Downloader } = require("ytdl-mp3");
-
-// ✅ make folder if not exists
-if (!fs.existsSync('./temp_songs')) fs.mkdirSync('./temp_songs');
-
-const downloader = new Downloader({
-  getTags: true,
-  output: "./temp_songs", // safe folder
-});
+const { ytmp3 } = require("@denzy-official/youtube_scrapper");
 
 cmd(
-  {
-    pattern: "ytmp3",
-    react: "🎶",
-    desc: "Download Song",
-    category: "download",
-    filename: __filename,
-  },
-  async (danuwa, mek, m, { q, from, reply }) => {
-    try {
-      if (!q) return reply("❌ *Please provide a song name or YouTube link*");
+{
+pattern: "song",
+react: "🎶",
+desc: "Download Song",
+category: "download",
+filename: __filename,
+},
+async (
+danuwa,
+mek,
+m,
+{
+from,
+quoted,
+body,
+isCmd,
+command,
+args,
+q,
+isGroup,
+sender,
+senderNumber,
+botNumber2,
+botNumber,
+pushname,
+isMe,
+isOwner,
+groupMetadata,
+groupName,
+participants,
+groupAdmins,
+isBotAdmins,
+isAdmins,
+reply,
+}
+) => {
+try {
+if (!q) return reply("❌ Please provide a song name or YouTube link");
 
-      const search = await yts(q);
-      const data = search.videos[0];
-      if (!data) return reply("❌ Song not found");
+const search = await yts(q);  
+  const data = search.videos[0];  
+  const url = data.url;  
 
-      const url = data.url;
+  let desc = `
 
-      await danuwa.sendMessage(
-        from,
-        { image: { url: data.thumbnail }, caption: `🎬 *${data.title}*` },
-        { quoted: mek }
-      );
+Song downloader
+🎬 Title: ${data.title}
+⏱️ Duration: ${data.timestamp}
+📅 Uploaded: ${data.ago}
+👀 Views: ${data.views.toLocaleString()}
+🔗 Watch Here: ${data.url}
+`;
 
-      const songData = await downloader.downloadSong(url);
+await danuwa.sendMessage(  
+    from,  
+    { image: { url: data.thumbnail }, caption: desc },  
+    { quoted: mek }  
+  );  
 
-      // send audio
-      await danuwa.sendMessage(
-        from,
-        {
-          audio: { url: songData.file },
-          mimetype: "audio/mpeg",
-        },
-        { quoted: mek }
-      );
+  const quality = "192";  
+  const songData = await ytmp3(url, quality);  
 
-    } catch (e) {
-      console.log(e);
-      reply(`❌ *Error:* ${e.message} 😞`);
-    }
-  }
+  let durationParts = data.timestamp.split(":").map(Number);  
+  let totalSeconds =  
+    durationParts.length === 3  
+      ? durationParts[0] * 3600 + durationParts[1] * 60 + durationParts[2]  
+      : durationParts[0] * 60 + durationParts[1];  
+
+  if (totalSeconds > 1800) {  
+    return reply("⏳ *Sorry, audio files longer than 30 minutes are not supported.*");  
+  }  
+
+  await danuwa.sendMessage(  
+    from,  
+    {  
+      audio: { url: songData.download.url },  
+      mimetype: "audio/mpeg",  
+    },  
+    { quoted: mek }  
+  );  
+
+  await danuwa.sendMessage(  
+    from,  
+    {  
+      document: { url: songData.download.url },  
+      mimetype: "audio/mpeg",  
+      fileName: `${data.title}.mp3`,  
+      caption: "🎶 *Your song is ready to be played!*",  
+    },  
+    { quoted: mek }  
+  );  
+
+  return reply("✅ Thank you");  
+} catch (e) {  
+  console.log(e);  
+  reply(`❌ *Error:* ${e.message} 😞`);  
+}
+
+}
 );
