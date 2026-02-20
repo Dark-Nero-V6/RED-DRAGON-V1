@@ -87,7 +87,7 @@ async function connectToWA() {
     } else if (connection === 'open') {
       console.log('✅ RED-DRAGON connected to WhatsApp');
 
-      const up = `*RED-DRAGON connected ✅*\n\n💕🥰ꜱʀɪ-ʟᴀɴᴋᴀɴ ᴍᴏꜱᴛ ꜱᴘᴇᴇᴅ & ʙᴇꜱᴛ ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ.✨🌷This Bot Developer Is Sasidu Rashmika\n\n> owner 94707158749\n\njoin my whatsapp group\nhttps://chat.whatsapp.com/HRL6ZtNQKSf8HrIqa1ziln`;
+      const up = `*RED-DRAGON connected ✅*\n\n💕🥰ꜱʀɪ-ʟᴀɴᴋᴀɴ ᴍᴏꜱᴛ ꜱᴘᴇᴇᴅ & ʙᴇꜱᴛ ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ.✨🌷This Bot Developer Is Sasidu Rashmika\n\n> owner 94707158749\n\njoin my whatsapp group\n\nhttps://chat.whatsapp.com/HRL6ZtNQKSf8HrIqa1ziln\n\n> Powered By Rashmika Tec...👨‍💻`;
       await danuwa.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
         image: { url: `https://github.com/Dark-Nero-V6/Dark-Nero-V7/blob/main/Images/Picsart_26-02-19_12-23-51-713.jpg?raw=true` },
         caption: up
