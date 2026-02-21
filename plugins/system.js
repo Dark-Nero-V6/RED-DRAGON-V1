@@ -17,10 +17,7 @@ async (danuwa, mek, m, {
     groupAdmins, isBotAdmins, isAdmins, reply
 }) => {
     try{
-let status = '*Uptime:* ${runtime(process.uptime())}
-  *Rum usage:* ${(process.memoryUsage().heapUsed / 1024 /1024).toFixed(2)}MB / ${math.round(require('os').totalmem / 1024 / 1024)MB
-  *Host name:* ${os.hostname()}
-  *Owner:* Sasidu Rashmika'
+let status = '*Uptime:* ${runtime(process.uptime())}\n*Rum usage:* ${(process.memoryUsage().heapUsed / 1024 /1024).toFixed(2)}MB / ${math.round(require('os').totalmem / 1024 / 1024)MB\n*Host name:* ${os.hostname()}\n*Owner:* Sasidu Rashmika'
                                                                                  
    return reply('${status}')
                                                                                  
