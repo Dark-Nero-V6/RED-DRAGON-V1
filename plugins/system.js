@@ -1,6 +1,6 @@
 const { cmd, commands } = require('../command');
 const config = require('../config');
-const systeminformation = require("systeminformation");
+const os = require("os");
 const {runtime} = require('../lib/functions');
 
 cmd({
@@ -17,14 +17,13 @@ async (danuwa, mek, m, {
     groupAdmins, isBotAdmins, isAdmins, reply
 }) => {
     try{
-let status = '*Uptime:* ${runtime(process.uptime())}\n*Rum usage:* ${(process.memoryUsage().heapUsed / 1024 /1024).toFixed(2)}MB / ${math.round(require('systeminformation').totalmem / 1024 / 1024)MB\n*Host name:* ${systeminformation.hostname()}\n*Owner:* Sasidu Rashmika'
-                                                                                 
-   return reply('${status}')
-                                                                                 
-                                                                                 
-    }catch(e)}
-    console.log(e)
-    reply('${e}')
+         const start = new Date().getTime();
 
-    }
-    })
+    await conn.sendMessage(from, { text: "🏓 Pong..." }, { quoted: mek });
+
+    const end = new Date().getTime();
+
+    const speed = end - start;
+
+    await conn.sendMessage(from, { text: ⚡ Speed: ${speed}ms }, { quoted: mek });
+});
