@@ -1,7 +1,7 @@
 const { cmd, commands } = require("../command");
 const { downloadContentFromMessage } = require('@whiskeysockets/baileys');
 const { exec } = require('child_process');
-const fsExtra = require('fs-extra');
+const fs = require('fs-extra');
 
 module.exports = {
     name: 'sticker',
@@ -19,18 +19,25 @@ module.exports = {
                     buffer = Buffer.concat([buffer, chunk]);
                 }
 
-                let fileName = `./temp_${Date.now()}.jpg`;
-                fs.writeFileSync(fileName, buffer);
+                let fileName = ./temp_${Date.now()}.jpg;
+                let stickerName = ./temp_${Date.now()}.webp;
+                
+                await fs.writeFile(fileName, buffer);
 
-                let stickerName = `./temp_${Date.now()}.webp`;
+                // මේ පේළිය හරිම පරිස්සමෙන් කොපි කරන්න
+                exec(ffmpeg -i ${fileName} -vcodec libwebp -filter:v "scale='if(gt(a,1),512,-1)':'if(gt(a,1),-1,512)',pad=512:512:(512-iw)/2:(512-ih)/2:color=0x00000000" ${stickerName}, async (err) => {
+                    
+                    if (err) {
+                        console.error(err);
+                        await fs.remove(fileName);
+                        return m.reply("ස්ටිකර් එක හදන්න බැරි වුණා! (FFmpeg Error)");
+                    }
 
-                // ffmpeg භාවිතයෙන් පින්තූරය ස්ටිකර් එකක් (webp) කරයි
-                exec(ffmpeg -i ${fileName} -vcodec libwebp -filter:v "scale='if(gt(a,1),512,-1)':'if(gt(a,1),-1,512)',pad=512:512:(512-iw)/2:(512-ih)/2:color=0x00000000" ${stickerName}, (err) => {
-                    fs.unlinkSync(fileName);
-                    if (err) return m.reply("ස්ටිකර් එක හදන්න බැරි වුණා! (FFmpeg error)");
-
-                    client.sendMessage(m.from, { sticker: fs.readFileSync(stickerName) }, { quoted: m });
-                    fs.unlinkSync(stickerName);
+                    await client.sendMessage(m.from, { sticker: await fs.readFile(stickerName) }, { quoted: m });
+                    
+                    // වැඩේ ඉවර වුණාම temp ෆයිල් මකනවා
+                    await fs.remove(fileName);
+                    await fs.remove(stickerName);
                 });
 
             } else {
