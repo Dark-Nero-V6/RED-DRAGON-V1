@@ -17,7 +17,7 @@ async (danuwa, mek, m, {
     groupAdmins, isBotAdmins, isAdmins, reply
 }) => {
     try{
-    let status = 'sasidu rashmika'
+    let status = '╭━━━〔 🧬 RED-DRAGON🔥 〕━━━⬣\n┃ 👑 Owner : Rashmika\n┃ ⚡ Speed  : ${ping} ms\n┃ 🕒 Uptime : ${runtime(process.uptime())}\n┃ ⚜ Mode   : Public\n╰━━━━━━━━━━━━━━━━⬣\n\n\n> Powered By Rashmika Tec...'
     return reply(`${status}`)
 
     }catch(e){
