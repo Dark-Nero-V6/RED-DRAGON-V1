@@ -5,13 +5,13 @@ const fs = require('fs-extra');
 const ffmpeg = require("ffmpeg");
 
 cmd({
-    pattern: "alive",
-    react: "🧑‍💻",
-    desc: "Check bot online or offline.",
-    category: "main",
+    pattern: "sticker",
+    react: "➿",
+    desc: "photo convert to sticker",
+    category: "convert",
     filename: __filename
 },
-    async (client, config, m, {
+async (danuwa, mek, m, {
     from, quoted, body, isCmd, command, args, q, isGroup,
     sender, senderNumber, botNumber2, botNumber, pushname,
     isMe, isOwner, groupMetadata, groupName, participants,
@@ -43,7 +43,7 @@ cmd({
                         return m.reply("Error: FFmpeg වැඩ කරන්නේ නැත!");
                     }
 
-                    await client.sendMessage(m.from, { sticker: await fs.readFile(stickerName) }, { quoted: m });
+                    await danuwa.sendMessage(m.from, { sticker: await fs.readFile(stickerName) }, { quoted: m });
                     
                     if (fs.existsSync(fileName)) await fs.remove(fileName);
                     if (fs.existsSync(stickerName)) await fs.remove(stickerName);
