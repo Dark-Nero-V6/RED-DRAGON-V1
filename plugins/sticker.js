@@ -19,10 +19,10 @@ module.exports = {
                     buffer = Buffer.concat([buffer, chunk]);
                 }
 
-                let fileName = ./temp_${Date.now()}.jpg;
+                let fileName = `./temp_${Date.now()}.jpg`;
                 fs.writeFileSync(fileName, buffer);
 
-                let stickerName = ./temp_${Date.now()}.webp;
+                let stickerName = `./temp_${Date.now()}.webp`;
 
                 // ffmpeg භාවිතයෙන් පින්තූරය ස්ටිකර් එකක් (webp) කරයි
                 exec(ffmpeg -i ${fileName} -vcodec libwebp -filter:v "scale='if(gt(a,1),512,-1)':'if(gt(a,1),-1,512)',pad=512:512:(512-iw)/2:(512-ih)/2:color=0x00000000" ${stickerName}, (err) => {
