@@ -18,10 +18,10 @@ async (danuwa, mek, m, {
 }) => {
     try{
     let status = 'sasidu rashmika'
-    return reply($'{status}')
+    return reply(`${status}`)
 
     }catch(e){
     console.log(e)
-    reply('${e}')
+    reply(`${e}`)
     }
 });
