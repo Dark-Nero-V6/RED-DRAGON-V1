@@ -38,6 +38,6 @@
     "sadaslk-dlcore": "^1.0.0",
     "abir-photo360-apis": "^1.0.2",
     "puppeteer": "^24.37.5",
-     "os": "^0.1.2"
+     "systeminformation": "^5.31.1"
   }
 }
