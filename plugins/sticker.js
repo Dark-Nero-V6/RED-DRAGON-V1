@@ -5,14 +5,19 @@ const fs = require('fs-extra');
 const ffmpeg = require("ffmpeg");
 
 cmd({
-    pattern: "sticker",
-    react: "➿", 
-    desc: "photo convert to sticker",
-    category: "converter",
+    pattern: "alive",
+    react: "🧑‍💻",
+    desc: "Check bot online or offline.",
+    category: "main",
     filename: __filename
-    },
-    async execute(client, m, config){
-        try {
+},
+    async (client, config, m, {
+    from, quoted, body, isCmd, command, args, q, isGroup,
+    sender, senderNumber, botNumber2, botNumber, pushname,
+    isMe, isOwner, groupMetadata, groupName, participants,
+    groupAdmins, isBotAdmins, isAdmins, reply
+}) => {
+    try {
             const quoted = m.quoted ? m.quoted : m;
             const mime = (quoted.msg || quoted).mimetype || '';
 
