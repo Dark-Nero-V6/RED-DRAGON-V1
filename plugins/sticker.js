@@ -4,16 +4,14 @@ const { exec } = require('child_process');
 const fs = require('fs-extra');
 const ffmpeg = require("ffmpeg");
 
-cmd(
-    {
-    pattern: 'sticker',
-    react: '➿', 
-    desc: 'photo convert to sticker',
-    category: 'converter',
+cmd({
+    pattern: "sticker",
+    react: "➿", 
+    desc: "photo convert to sticker",
+    category: "converter",
     filename: __filename
     },
-        
-    async execute(client, m, config) {
+    async execute(client, m, config){
         try {
             const quoted = m.quoted ? m.quoted : m;
             const mime = (quoted.msg || quoted).mimetype || '';
