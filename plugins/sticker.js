@@ -20,32 +20,32 @@ module.exports = {
                     buffer = Buffer.concat([buffer, chunk]);
                 }
 
-                let fileName = `./temp_${Date.now()}.jpg`;
-                let stickerName = `./temp_${Date.now()}.webp`;
+                let fileName = ./temp_${Date.now()}.jpg;
+                let stickerName = ./temp_${Date.now()}.webp;
                 
                 await fs.writeFile(fileName, buffer);
 
-                // මේ පේළිය හරිම පරිස්සමෙන් කොපි කරන්න
-                exec(ffmpeg -i ${fileName} -vcodec libwebp -filter:v "scale='if(gt(a,1),512,-1)':'if(gt(a,1),-1,512)',pad=512:512:(512-iw)/2:(512-ih)/2:color=0x00000000" ${stickerName}, async (err) => {
-                    
+                // ffmpeg command එක පහත පේළියේ ඇත
+                let cmd = ffmpeg -i ${fileName} -vcodec libwebp -filter:v "scale=512:512:force_original_aspect_ratio=decrease,pad=512:512:(512-iw)/2:(512-ih)/2:color=0x00000000" ${stickerName};
+
+                exec(cmd, async (err) => {
                     if (err) {
                         console.error(err);
-                        await fs.remove(fileName);
-                        return m.reply("ස්ටිකර් එක හදන්න බැරි වුණා! (FFmpeg Error)");
+                        if (fs.existsSync(fileName)) await fs.remove(fileName);
+                        return m.reply("Error: FFmpeg වැඩ කරන්නේ නැත!");
                     }
 
                     await client.sendMessage(m.from, { sticker: await fs.readFile(stickerName) }, { quoted: m });
                     
-                    // වැඩේ ඉවර වුණාම temp ෆයිල් මකනවා
-                    await fs.remove(fileName);
-                    await fs.remove(stickerName);
+                    if (fs.existsSync(fileName)) await fs.remove(fileName);
+                    if (fs.existsSync(stickerName)) await fs.remove(stickerName);
                 });
 
             } else {
                 m.reply(කරුණාකර පින්තූරයකට Mention කර ${config.prefix}sticker ලෙස ටයිප් කරන්න.);
             }
         } catch (e) {
-            console.log(e);
+            console.error(e);
             m.reply("වැරදීමක් සිදුවුණා!");
         }
     }
