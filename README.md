@@ -1,3 +1,3 @@
 # RED-DRAGON-V1
 💕🥰ꜱʀɪ-ʟᴀɴᴋᴀɴ ᴍᴏꜱᴛ ꜱᴘᴇᴇᴅ &amp; ʙᴇꜱᴛ ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ.✨🌷This Bot Developer Is Sasidu Rashmika.💝
-![Uploading image.png…]()
+https://github.com/Dark-Nero-V6/Dark-Nero-V7/blob/main/Images/Picsart_26-02-19_12-23-51-713.jpg?raw=true
