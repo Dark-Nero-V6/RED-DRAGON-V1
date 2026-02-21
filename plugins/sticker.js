@@ -4,10 +4,15 @@ const { exec } = require('child_process');
 const fs = require('fs-extra');
 const ffmpeg = require("ffmpeg");
 
-module.exports = {
-    name: 'sticker',
+cmd(
+    {
+    pattern: 'sticker',
+    react: '➿', 
+    desc: 'photo convert to sticker',
     category: 'converter',
-    desc: 'පින්තූර ස්ටිකර් බවට පත් කරයි',
+    filename: __filename
+    },
+        
     async execute(client, m, config) {
         try {
             const quoted = m.quoted ? m.quoted : m;
