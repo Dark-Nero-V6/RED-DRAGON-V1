@@ -17,5 +17,11 @@ async (danuwa, mek, m, {
     groupAdmins, isBotAdmins, isAdmins, reply
 }) => {
     try{
-         const start = new Date().getTime();\n\nawait conn.sendMessage(from, { text: "🏓 Pong..." }, { quoted: mek });\n\nconst end = new Date().getTime();\n\nconst speed = end - start;\n\nawait conn.sendMessage(from, { text: ⚡ Speed: ${speed}ms }, { quoted: mek });
+    let status = 'sasidu rashmika'
+    return reply($'{status}')
+
+    }catch(e){
+    console.log(e)
+    reply('${e}')
+    }
 });
