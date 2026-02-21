@@ -2,6 +2,7 @@ const { cmd, commands } = require("../command");
 const { downloadContentFromMessage } = require('@whiskeysockets/baileys');
 const { exec } = require('child_process');
 const fs = require('fs-extra');
+const ffmpeg = require("ffmpeg");
 
 module.exports = {
     name: 'sticker',
@@ -19,8 +20,8 @@ module.exports = {
                     buffer = Buffer.concat([buffer, chunk]);
                 }
 
-                let fileName = ./temp_${Date.now()}.jpg;
-                let stickerName = ./temp_${Date.now()}.webp;
+                let fileName = `./temp_${Date.now()}.jpg`;
+                let stickerName = `./temp_${Date.now()}.webp`;
                 
                 await fs.writeFile(fileName, buffer);
 
