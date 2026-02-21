@@ -42,7 +42,7 @@ module.exports = {
                 });
 
             } else {
-                m.reply(කරුණාකර පින්තූරයකට Mention කර ${config.prefix}sticker ලෙස ටයිප් කරන්න.);
+                m.reply("කරුණාකර පින්තූරයකට Mention කර ${config.prefix}sticker ලෙස ටයිප් කරන්න.");
             }
         } catch (e) {
             console.error(e);
