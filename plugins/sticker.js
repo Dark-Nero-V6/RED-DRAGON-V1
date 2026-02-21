@@ -1,7 +1,7 @@
 const { cmd, commands } = require("../command");
 const { downloadContentFromMessage } = require('@whiskeysockets/baileys');
 const { exec } = require('child_process');
-const fs-extra = require('fs-extra');
+const fsExtra = require('fs-extra');
 
 module.exports = {
     name: 'sticker',
