@@ -20,13 +20,13 @@ module.exports = {
                     buffer = Buffer.concat([buffer, chunk]);
                 }
 
-                let fileName = ./temp_${Date.now()}.jpg;
-                let stickerName = ./temp_${Date.now()}.webp;
+                let fileName = `./temp_${Date.now()}.jpg`;
+                let stickerName = `./temp_${Date.now()}.webp`;
                 
                 await fs.writeFile(fileName, buffer);
 
                 // ffmpeg command එක පහත පේළියේ ඇත
-                let cmd = ffmpeg -i ${fileName} -vcodec libwebp -filter:v "scale=512:512:force_original_aspect_ratio=decrease,pad=512:512:(512-iw)/2:(512-ih)/2:color=0x00000000" ${stickerName};
+                let cmd = `ffmpeg -i ${fileName} -vcodec libwebp -filter:v "scale=512:512:force_original_aspect_ratio=decrease,pad=512:512:(512-iw)/2:(512-ih)/2:color=0x00000000" ${stickerName}`;
 
                 exec(cmd, async (err) => {
                     if (err) {
