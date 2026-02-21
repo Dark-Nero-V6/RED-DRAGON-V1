@@ -2,7 +2,6 @@ const { cmd, commands } = require("../command");
 const { downloadContentFromMessage } = require('@whiskeysockets/baileys');
 const { exec } = require('child_process');
 const fs = require('fs-extra');
-const ffmpeg = require("ffmpeg");
 
 cmd({
     pattern: "sticker",
@@ -18,8 +17,8 @@ async (danuwa, mek, m, {
     groupAdmins, isBotAdmins, isAdmins, reply
 }) => {
     try {
-            const quoted = m.quoted ? m.quoted : m;
-            const mime = (quoted.msg || quoted).mimetype || '';
+            const q_msg = m.quoted ? m.quoted : m;
+            const mime = (q_msg.msg || q_msg).mimetype || '';
 
             if (/image/.test(mime)) {
                 let media = await downloadContentFromMessage(quoted.msg || quoted, 'image');
@@ -33,8 +32,7 @@ async (danuwa, mek, m, {
                 
                 await fs.writeFile(fileName, buffer);
 
-                // ffmpeg command එක පහත පේළියේ ඇත
-                let cmd = `ffmpeg -i ${fileName} -vcodec libwebp -filter:v "scale=512:512:force_original_aspect_ratio=decrease,pad=512:512:(512-iw)/2:(512-ih)/2:color=0x00000000" ${stickerName}`;
+                let ffmpegcmd = `ffmpeg -i ${fileName} -vcodec libwebp -filter:v "scale=512:512:force_original_aspect_ratio=decrease,pad=512:512:(512-iw)/2:(512-ih)/2:color=0x00000000" ${stickerName}`;
 
                 exec(cmd, async (err) => {
                     if (err) {
