@@ -56,5 +56,4 @@ async (danuwa, mek, m, {
             console.error(e);
             m.reply("වැරදීමක් සිදුවුණා!");
         }
-    }
-};
+    });
